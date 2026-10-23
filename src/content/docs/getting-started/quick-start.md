@@ -14,12 +14,29 @@ crabyard new "My Desktop App"
 The CLI will prompt you to choose:
 
 1. **Auth provider** — GitHub, Google, or None
-2. **UI framework** — shadcn/ui, DaisyUI, tesign, or Minimal
+2. **UI framework** — shadcn/ui, daisyUI, or Minimal
 
 To skip prompts, pass flags directly:
 
 ```sh
 crabyard new "My Desktop App" --auth github --ui shadcn --yes
+```
+
+For a local-first starting point and a focused AI brief:
+
+```sh
+crabyard new "Field Notes" --preset local-first --brief "A local-first research notebook with tags and Markdown export" --yes
+crabyard check --project ./field-notes
+crabyard context --project ./field-notes --brief "Add tags and search" --output docs/TAGS_CONTEXT.md
+```
+
+`check` reports configuration gaps without changing files. `context` writes a curated agent handoff without loading environment secrets or overwriting an existing output. The generation brief is saved in `docs/AI_CONTEXT.md`. See [AI development](/guides/ai-development/) for JSON audits, strict CI checks, and context previews.
+
+To use public templates from a local checkout without a license key:
+
+```sh
+git clone https://github.com/Crabyardcom/crabyard-templates.git
+crabyard new "My Desktop App" --template ./crabyard-templates --preset local-first --yes
 ```
 
 ## Run the app

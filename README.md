@@ -1,6 +1,8 @@
 # Crabyard Documentation
 
-The [Crabyard documentation](https://crabyard-docs-production.up.railway.app), built with Astro and Starlight. Standalone repository: [Crabyardcom/crabyard-docs](https://github.com/Crabyardcom/crabyard-docs).
+The [Crabyard documentation](https://docs.crabyard.com), built with Astro and Starlight. Standalone repository: [Crabyardcom/crabyard-docs](https://github.com/Crabyardcom/crabyard-docs).
+
+Build with Node.js 24 and Bun. CI and the Docker builder use Node.js 24; the static production server runs on Bun.
 
 ```sh
 bun install --frozen-lockfile

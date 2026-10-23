@@ -1,9 +1,9 @@
 ---
 title: UI Frameworks
-description: Choose between shadcn/ui, DaisyUI, Tesign, or Minimal for your app's component library.
+description: Choose between shadcn/ui, daisyUI, or Minimal for your app's component library.
 ---
 
-Crabyard supports four UI frameworks. You choose one during project generation with `--ui <framework>`, or switch later with `crabyard update-ui --switch <framework>`.
+Crabyard supports three UI choices. You choose one during project generation with `--ui <framework>`, or switch later with `crabyard update-ui --switch <framework>`.
 
 All themes include these shared components out of the box:
 
@@ -71,33 +71,13 @@ No installation required — all [DaisyUI components](https://daisyui.com/compon
 
 ### Theming
 
-Change the theme in `tailwind.config.js`:
+Change the theme in `src/index.css`:
 
-```js
-daisyui: {
-  themes: ["dark", "light", "cyberpunk"],
+```css
+@plugin "daisyui" {
+  themes: dark --default, light, cyberpunk;
 }
 ```
-
-## tesign
-
-[tesign](https://github.com/Crabyardcom/tesign) (`@slideup/design`) is a custom component library with a shadcn-compatible API. It includes components adapted for desktop apps with built-in theming.
-
-### What's included
-
-The overlay ships with adapted components: Button, Card, Input, Badge, Separator, Switch (Toggle), and TitleBar. These match the shadcn API surface so the rest of the scaffold works without changes.
-
-### Adding more components
-
-```sh
-npx @slideup/design add [component-name]
-npx @slideup/design list          # see all available
-npx @slideup/design diff          # check for updates
-```
-
-### Theming
-
-tesign uses Tailwind CSS v4 with OKLCH color variables in `src/index.css`, similar to the shadcn theme system.
 
 ## Minimal
 

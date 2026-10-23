@@ -85,7 +85,6 @@ The `npm_dev_dependencies` map is merged into the generated `package.json`'s `de
 |--------|---------|------------|
 | `shadcn` | `ui/shadcn/` | Radix UI primitives + shadcn styling |
 | `daisyui` | `ui/daisyui/` | Tailwind class-based components |
-| `tesign` | `ui/tesign/` | Custom design system (@slideup/design) |
 
 ## Token System
 

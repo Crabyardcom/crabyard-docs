@@ -3,7 +3,7 @@ import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 
 export default defineConfig({
-	site: 'https://crabyard-docs-production.up.railway.app',
+	site: 'https://docs.crabyard.com',
 	integrations: [
 		starlight({
 			title: 'Crabyard',
@@ -25,6 +25,7 @@ export default defineConfig({
 						{ label: 'UI Frameworks', slug: 'guides/ui' },
 						{ label: 'Settings System', slug: 'guides/settings' },
 						{ label: 'Auto-Updates', slug: 'guides/auto-updates' },
+						{ label: 'AI Handoff & Readiness', slug: 'guides/ai-development' },
 						{ label: 'Custom Title Bar', slug: 'guides/title-bar' },
 					],
 				},

@@ -22,7 +22,7 @@ crabyard new [APP_NAME] [OPTIONS]
 | Flag | Description | Default |
 |------|-------------|---------|
 | `--auth <MODULE>` | Auth provider: `github`, `google`, or `none` | Interactive prompt |
-| `--ui <FRAMEWORK>` | UI framework: `shadcn`, `daisyui`, `tesign`, or `minimal` | Interactive prompt |
+| `--ui <FRAMEWORK>` | UI framework: `shadcn`, `daisyui`, or `minimal` | Interactive prompt |
 | `--slug <SLUG>` | App slug (derived from name if omitted) | Auto-derived |
 | `--bundle-id <ID>` | Bundle identifier (derived from slug if omitted) | Auto-derived |
 | `--app-version <VER>` | Initial version | `0.1.0` |
@@ -32,6 +32,7 @@ crabyard new [APP_NAME] [OPTIONS]
 | `--recipe <FILE>` | Reuse a generated `crabyard.recipe.toml` | None |
 | `--preset <NAME>` | Apply `minimal`, `desktop`, or `local-first` defaults | None |
 | `--dry-run` | Print a JSON generation plan without downloading, installing, or writing files | `false` |
+| `--brief <TEXT>` | Generate a focused `docs/AI_CONTEXT.md` handoff with the new app | None |
 | `--output <DIR>` | Output directory | `./<app-slug>` |
 | `--license-key <KEY>` | License key for template download | `$CRABYARD_LICENSE_KEY` |
 | `--yes` / `-y` | Accept all defaults without prompting | `false` |
@@ -111,6 +112,32 @@ Outputs a pass/fail summary with version numbers and actionable fix instructions
 
 ---
 
+## `crabyard check`
+
+Inspect a generated project's configuration without changing files.
+
+```sh
+crabyard check --project ./my-app
+crabyard check --project ./my-app --json
+crabyard check --project ./my-app --strict
+```
+
+The report checks project identity, missing lockfiles and agent guidance, OAuth configuration, release preparation, capabilities, and secret-ignore hazards. Findings include stable IDs and next actions. Errors return exit code 1; `--strict` also treats warnings as failures. `--project` defaults to the current directory.
+
+## `crabyard context`
+
+Export a focused coding-agent handoff for the current project.
+
+```sh
+crabyard context --project ./my-app --brief "Add tags and Markdown export"
+crabyard context --project ./my-app --brief "Add search" --dry-run
+crabyard context --project ./my-app --brief "Add search" --output docs/SEARCH_CONTEXT.md
+```
+
+The default output is `docs/AI_CONTEXT.md`. The document includes selected stack and features, relevant files, readiness blockers, and a first-slice and verification plan. Secret files are not read. Existing output files are preserved. See [AI Handoff & Readiness](/guides/ai-development/).
+
+---
+
 ## `crabyard update-ui`
 
 Update or switch the UI framework in an existing project.
@@ -123,7 +150,7 @@ crabyard update-ui [OPTIONS]
 
 | Flag | Description | Default |
 |------|-------------|---------|
-| `--switch <FRAMEWORK>` | Switch to a different UI framework: `shadcn`, `daisyui`, `tesign`, or `minimal` | Current framework |
+| `--switch <FRAMEWORK>` | Switch to a different UI framework: `shadcn`, `daisyui`, or `minimal` | Current framework |
 | `--template <DIR>` | Path to the template directory | API download |
 | `--license-key <KEY>` | License key for template download | `$CRABYARD_LICENSE_KEY` |
 | `--force` | Overwrite locally modified files without prompting | `false` |
@@ -250,7 +277,7 @@ crabyard preview [OPTIONS]
 | Flag | Description | Default |
 |------|-------------|---------|
 | `--auth <MODULE>` | Auth module: `github`, `google`, or `none` | `none` |
-| `--ui <FRAMEWORK>` | UI framework: `shadcn`, `daisyui`, `tesign`, or `minimal` | `shadcn` |
+| `--ui <FRAMEWORK>` | UI framework: `shadcn`, `daisyui`, or `minimal` | `shadcn` |
 | `--template <DIR>` | Path to the template directory | Auto-detect |
 | `--license-key <KEY>` | License key for template download | `$CRABYARD_LICENSE_KEY` |
 

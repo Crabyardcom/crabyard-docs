@@ -3,7 +3,7 @@ title: Introduction
 description: What is Crabyard and why use it.
 ---
 
-Crabyard is a CLI tool that generates production-ready [Tauri v2](https://v2.tauri.app/) desktop applications. Instead of spending days wiring up auth, settings, auto-updates, and UI components, you run one command and get a working app in seconds.
+Crabyard is a CLI tool that generates [Tauri v2](https://v2.tauri.app/) desktop app foundations. Compose a Rust and React stack with authentication, settings, updater integration, coding-agent instructions, and repeatable project recipes.
 
 ## Why Crabyard?
 
@@ -16,7 +16,7 @@ Starting a Tauri project from scratch means:
 - Choosing and configuring a UI framework
 - Wiring all of it together with proper error handling
 
-Crabyard does all of this for you. Every generated project compiles with zero errors, zero warnings, and is ready to develop on immediately.
+Crabyard connects these foundations in a generated project. The supported combinations are checked in CI. Your app still needs its own credentials, signing configuration, product behavior, and release review; `crabyard check` identifies configuration gaps before handoff.
 
 ## How it works
 
@@ -39,7 +39,7 @@ Every generated app includes:
 | State | Zustand |
 | Persistence | tauri-plugin-store |
 | Bundler | Vite |
-| Package manager | Bun |
+| Package manager | Bun, npm, pnpm, or Yarn |
 
 ## What's next
 

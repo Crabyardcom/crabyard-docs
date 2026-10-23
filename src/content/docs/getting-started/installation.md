@@ -37,14 +37,30 @@ xcode-select --install
 **macOS / Linux:**
 
 ```sh
-curl -fsSL https://crabyard-web-production.up.railway.app/install.sh | sh
+curl -fsSL https://crabyard.com/install.sh | sh
 ```
 
 **Windows (PowerShell):**
 
 ```powershell
+irm https://crabyard.com/install.ps1 | iex
+```
+
+The public installer uses a fixed Crabyard Railway endpoint if the custom API domain is unavailable, and reports that choice. The setup scripts pass the selected API origin to their CLI wizard for that run. The CLI itself never silently sends a license key to a different server.
+
+If the custom domain cannot be reached, use the published Railway installer and select the API origin explicitly in your current shell:
+
+```sh
+export CRABYARD_API_URL=https://crabyard-api-production.up.railway.app
+curl -fsSL https://crabyard-web-production.up.railway.app/install.sh | sh
+```
+
+```powershell
+$env:CRABYARD_API_URL="https://crabyard-api-production.up.railway.app"
 irm https://crabyard-web-production.up.railway.app/install.ps1 | iex
 ```
+
+`CRABYARD_API_URL` must be an HTTPS origin without credentials, path, query, or fragment. Remove the override when you want to return to the canonical `https://api.crabyard.com` endpoint.
 
 **From source:**
 
@@ -64,7 +80,7 @@ This checks all prerequisites: Rust, Cargo, Bun, Git, Tauri CLI, and platform-sp
 
 ## License key
 
-Purchase a license at [Crabyard](https://crabyard-web-production.up.railway.app) and set your key:
+Purchase a license at [Crabyard](https://crabyard.com) and set your key:
 
 ```sh
 export CRABYARD_LICENSE_KEY=CRAB-...
