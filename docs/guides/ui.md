@@ -3,6 +3,8 @@ title: UI Frameworks
 description: Choose between shadcn/ui, daisyUI, or Minimal for your app's component library.
 ---
 
+# UI Frameworks
+
 Crabyard supports three UI choices. You choose one during project generation with `--ui <framework>`, or switch later with `crabyard update-ui --switch <framework>`.
 
 All themes include these shared components out of the box:
@@ -21,11 +23,11 @@ And these shared hooks:
 - `useSettings` — app settings with Tauri backend persistence
 - `useTheme` — dark/light theme toggle (CSS class or data-theme)
 
-## shadcn/ui
+## shadcn/ui {#shadcnui}
 
 [shadcn/ui](https://ui.shadcn.com/) provides accessible, composable React components built on Radix UI primitives and styled with Tailwind CSS.
 
-### What's included
+### What's included {#whats-included}
 
 The generated app ships with these pre-configured shadcn/ui components:
 
@@ -41,7 +43,7 @@ The generated app ships with these pre-configured shadcn/ui components:
 - `Switch` — toggle controls
 - `Tooltip` — hover hints
 
-### Adding more components
+### Adding more components {#adding-more-components}
 
 ```sh
 bunx shadcn@latest add [component-name]
@@ -49,19 +51,19 @@ bunx shadcn@latest add [component-name]
 
 Components are generated into `src/components/ui/`.
 
-### Customization
+### Customization {#customization}
 
 Theming is controlled via CSS variables in `src/index.css`. The default theme uses a dark zinc palette.
 
-## DaisyUI
+## DaisyUI {#daisyui}
 
 [DaisyUI](https://daisyui.com/) adds semantic component classes to Tailwind CSS — no extra JavaScript, just utility classes.
 
-### What's included
+### What's included {#whats-included-1}
 
 DaisyUI is configured as a Tailwind plugin with the `dark` theme. Components like buttons, cards, inputs, modals, and toggles use DaisyUI class names (`btn`, `card`, `input`, `modal`, `toggle`).
 
-### Adding components
+### Adding components {#adding-components}
 
 No installation required — all [DaisyUI components](https://daisyui.com/components/) are available via class names:
 
@@ -69,7 +71,7 @@ No installation required — all [DaisyUI components](https://daisyui.com/compon
 <button className="btn btn-primary">Click me</button>
 ```
 
-### Theming
+### Theming {#theming}
 
 Change the theme in `src/index.css`:
 
@@ -79,15 +81,15 @@ Change the theme in `src/index.css`:
 }
 ```
 
-## Minimal
+## Minimal {#minimal}
 
 Minimal is a zero-dependency theme using only Tailwind CSS utilities — no Radix, no DaisyUI plugin, no external component library.
 
-### What's included
+### What's included {#whats-included-2}
 
 All core components (Button, Card, Dialog, Input, Badge, Switch, etc.) are implemented with pure Tailwind classes. The only runtime dependency is `lucide-react` for icons.
 
-### When to use it
+### When to use it {#when-to-use-it}
 
 Choose Minimal when you want:
 - Full control over styling with no opinionated abstractions

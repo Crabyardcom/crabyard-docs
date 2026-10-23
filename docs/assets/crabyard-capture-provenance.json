@@ -1,0 +1,32 @@
+{
+  "cli_version": "crabyard 1.8.0",
+  "cli_commit": "e2ca6a3c9157a91a0336ae93088e6b166f858e9b",
+  "executable_sha256": "30af599a3fc9108b8a0786211df292263eaaab5845be506070ca7c9fbfdc8c15",
+  "template_commit": "0487ac8fdbad23e95d7e3858b2dcebc39348e291",
+  "capture_method": "Actual executable in Windows ConPTY; ANSI stream decoded into terminal cells by pyte; cells rendered in headless Chromium.",
+  "terminal": {
+    "columns": 112,
+    "rows": 33
+  },
+  "credentials": "No license key supplied; local template; credential-bearing environment variables excluded.",
+  "terminal_environment": {
+    "TERM": "xterm-256color",
+    "COLORTERM": "truecolor",
+    "NO_COLOR": "unset"
+  },
+  "captured_at_utc": "2026-10-23T15:56:25Z",
+  "binary_profile": "debug",
+  "assets": [
+    {
+      "file": "crabyard-tui-wizard.png",
+      "command": "crabyard new \"Field Notes\" --auth none --ui shadcn --author Crabyard --bundle-id com.crabyard.fieldnotes --extras sql,fs,log,window-state --template template --no-git --no-install",
+      "terminal_columns": 112,
+      "terminal_rows": 33,
+      "displayed_rows": 33,
+      "image_width": 1400,
+      "image_height": 900,
+      "sha256": "5ca6ba5f153a99fdaa277cdf549e94c9a74e719a8caa0e26abc7b8b275ee72f9",
+      "presentation": "Terminal cells and original colors preserved; blank margin rows trimmed for CLI captures. Window chrome and descriptive captions added outside the terminal."
+    }
+  ]
+}

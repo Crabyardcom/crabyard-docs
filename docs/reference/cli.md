@@ -3,7 +3,9 @@ title: CLI Commands
 description: Complete reference for all Crabyard CLI commands and flags.
 ---
 
-## `crabyard new`
+# CLI Commands
+
+## `crabyard new` {#crabyard-new}
 
 Generate a new Tauri v2 desktop app.
 
@@ -11,13 +13,13 @@ Generate a new Tauri v2 desktop app.
 crabyard new [APP_NAME] [OPTIONS]
 ```
 
-### Arguments
+### Arguments {#arguments}
 
 | Argument | Description |
 |----------|-------------|
 | `APP_NAME` | Display name for the app (e.g. `"My Desktop App"`). If omitted, prompted interactively. |
 
-### Options
+### Options {#options}
 
 | Flag | Description | Default |
 |------|-------------|---------|
@@ -37,18 +39,19 @@ crabyard new [APP_NAME] [OPTIONS]
 | `--license-key <KEY>` | License key for template download | `$CRABYARD_LICENSE_KEY` |
 | `--yes` / `-y` | Accept all defaults without prompting | `false` |
 | `--no-git` | Skip `git init` and initial commit | `false` |
-| `--no-install` | Skip dependency installation (`bun install`) | `false` |
-| `--pm <PM>` | Package manager: `bun`, `pnpm`, `yarn`, or `npm` | Auto-detected |
+| `--no-install` | Skip frontend dependency installation and icon generation | `false` |
+| `--pm <PM>` | Package manager: `bun`, `pnpm`, `yarn`, or `npm` | Configured default, otherwise `bun` |
 | `--extras <FEATURE,...>` | Comma-separated extras to include (e.g. `notifications,clipboard`) | None |
 
-### Environment variables
+### Environment variables {#environment-variables}
 
 | Variable | Description |
 |----------|-------------|
 | `CRABYARD_LICENSE_KEY` | License key (alternative to `--license-key`) |
 | `CRABYARD_TEMPLATE` | Local template path (alternative to `--template`) |
+| `CRABYARD_API_URL` | Explicit HTTPS origin for the licensed API; no credentials, path, query, or fragment |
 
-### Examples
+### Examples {#examples}
 
 ```sh
 # Fully interactive
@@ -64,7 +67,7 @@ crabyard new "My App" --auth github --ui shadcn --yes
 crabyard new "My App" --template ./my-scaffold --yes --no-install
 ```
 
-### Presets and reproducible recipes
+### Presets and reproducible recipes {#presets-and-reproducible-recipes}
 
 ```sh
 crabyard presets
@@ -88,7 +91,7 @@ This path does not prompt or install desktop toolchains. Building the generated 
 
 ---
 
-## `crabyard doctor`
+## `crabyard doctor` {#crabyard-doctor}
 
 Check system prerequisites for Tauri development.
 
@@ -112,7 +115,7 @@ Outputs a pass/fail summary with version numbers and actionable fix instructions
 
 ---
 
-## `crabyard check`
+## `crabyard check` {#crabyard-check}
 
 Inspect a generated project's configuration without changing files.
 
@@ -124,7 +127,7 @@ crabyard check --project ./my-app --strict
 
 The report checks project identity, missing lockfiles and agent guidance, OAuth configuration, release preparation, capabilities, and secret-ignore hazards. Findings include stable IDs and next actions. Errors return exit code 1; `--strict` also treats warnings as failures. `--project` defaults to the current directory.
 
-## `crabyard context`
+## `crabyard context` {#crabyard-context}
 
 Export a focused coding-agent handoff for the current project.
 
@@ -134,11 +137,11 @@ crabyard context --project ./my-app --brief "Add search" --dry-run
 crabyard context --project ./my-app --brief "Add search" --output docs/SEARCH_CONTEXT.md
 ```
 
-The default output is `docs/AI_CONTEXT.md`. The document includes selected stack and features, relevant files, readiness blockers, and a first-slice and verification plan. Secret files are not read. Existing output files are preserved. See [AI Handoff & Readiness](/guides/ai-development/).
+The default output is `docs/AI_CONTEXT.md`. The document includes selected stack and features, relevant files, readiness blockers, and a first-slice and verification plan. Environment values and source bodies are excluded. Existing output files are preserved. See [AI Handoff & Readiness](../guides/ai-development.md).
 
 ---
 
-## `crabyard update-ui`
+## `crabyard update-ui` {#crabyard-update-ui}
 
 Update or switch the UI framework in an existing project.
 
@@ -146,7 +149,7 @@ Update or switch the UI framework in an existing project.
 crabyard update-ui [OPTIONS]
 ```
 
-### Options
+### Options {#options-1}
 
 | Flag | Description | Default |
 |------|-------------|---------|
@@ -157,7 +160,7 @@ crabyard update-ui [OPTIONS]
 | `--dry-run` | Show what would change without modifying files | `false` |
 | `--rollback` | Rollback to the previously used UI framework | `false` |
 
-### Examples
+### Examples {#examples-1}
 
 ```sh
 # Switch from shadcn to daisyui
@@ -172,7 +175,7 @@ crabyard update-ui --rollback
 
 ---
 
-## `crabyard add`
+## `crabyard add` {#crabyard-add}
 
 Add a Tauri plugin or feature to an existing project. Automatically wires up npm dependencies, Cargo dependencies, Tauri plugin registration, and capabilities.
 
@@ -180,20 +183,20 @@ Add a Tauri plugin or feature to an existing project. Automatically wires up npm
 crabyard add <FEATURE> [OPTIONS]
 ```
 
-### Arguments
+### Arguments {#arguments-1}
 
 | Argument | Description |
 |----------|-------------|
 | `FEATURE` | Feature to add. Use `list` to see all available features. |
 
-### Options
+### Options {#options-2}
 
 | Flag | Description | Default |
 |------|-------------|---------|
 | `--project <DIR>` / `-p` | Path to the project directory | Current directory |
 | `--dry-run` | Show what would change without modifying files | `false` |
 
-### Available features
+### Available features {#available-features}
 
 | Feature | Description |
 |---------|-------------|
@@ -222,7 +225,7 @@ crabyard add <FEATURE> [OPTIONS]
 | `sentry` | Error tracking and crash reporting with Sentry |
 | `window-state` | Persist and restore window size/position |
 
-### Examples
+### Examples {#examples-2}
 
 ```sh
 # List available features
@@ -237,7 +240,7 @@ crabyard add sql --dry-run
 
 ---
 
-## `crabyard eject`
+## `crabyard eject` {#crabyard-eject}
 
 Remove Crabyard metadata from a generated project, leaving a clean standalone Tauri app. Deletes `manifest.toml` and strips any remaining `CRABYARD:` markers from source files.
 
@@ -245,14 +248,14 @@ Remove Crabyard metadata from a generated project, leaving a clean standalone Ta
 crabyard eject [OPTIONS]
 ```
 
-### Options
+### Options {#options-3}
 
 | Flag | Description | Default |
 |------|-------------|---------|
 | `--project <DIR>` / `-p` | Path to the project directory | Current directory |
 | `--dry-run` | Show what would change without modifying files | `false` |
 
-### Examples
+### Examples {#examples-3}
 
 ```sh
 # Eject the current project
@@ -264,7 +267,7 @@ crabyard eject --dry-run
 
 ---
 
-## `crabyard preview`
+## `crabyard preview` {#crabyard-preview}
 
 Preview the file tree that would be generated for a given auth and UI combination, without creating any files.
 
@@ -272,7 +275,7 @@ Preview the file tree that would be generated for a given auth and UI combinatio
 crabyard preview [OPTIONS]
 ```
 
-### Options
+### Options {#options-4}
 
 | Flag | Description | Default |
 |------|-------------|---------|
@@ -281,7 +284,7 @@ crabyard preview [OPTIONS]
 | `--template <DIR>` | Path to the template directory | Auto-detect |
 | `--license-key <KEY>` | License key for template download | `$CRABYARD_LICENSE_KEY` |
 
-### Examples
+### Examples {#examples-4}
 
 ```sh
 # Preview default scaffolding (none auth + shadcn)
@@ -293,7 +296,7 @@ crabyard preview --auth github --ui daisyui
 
 ---
 
-## `crabyard upgrade`
+## `crabyard upgrade` {#crabyard-upgrade}
 
 Check for and apply template updates to an existing project. Compares your project files against the latest template version and shows what has changed.
 
@@ -301,7 +304,7 @@ Check for and apply template updates to an existing project. Compares your proje
 crabyard upgrade [OPTIONS]
 ```
 
-### Options
+### Options {#options-5}
 
 | Flag | Description | Default |
 |------|-------------|--------|
@@ -310,7 +313,7 @@ crabyard upgrade [OPTIONS]
 | `--force` | Overwrite locally modified files without prompting | `false` |
 | `--dry-run` | Show what would change without modifying files | `false` |
 
-### Examples
+### Examples {#examples-5}
 
 ```sh
 # Check for template updates
@@ -322,7 +325,7 @@ crabyard upgrade --force
 
 ---
 
-## `crabyard plugins`
+## `crabyard plugins` {#crabyard-plugins}
 
 Browse the catalog of official Tauri v2 plugins with descriptions and install hints.
 
@@ -330,13 +333,13 @@ Browse the catalog of official Tauri v2 plugins with descriptions and install hi
 crabyard plugins [FILTER]
 ```
 
-### Arguments
+### Arguments {#arguments-2}
 
 | Argument | Description |
 |----------|-------------|
 | `FILTER` | Optional keyword to filter the list (e.g. `storage`, `window`) |
 
-### Examples
+### Examples {#examples-6}
 
 ```sh
 # List all plugins
@@ -348,7 +351,7 @@ crabyard plugins window
 
 ---
 
-## `crabyard init`
+## `crabyard init` {#crabyard-init}
 
 Initialize Crabyard in an existing Tauri v2 project. Detects the current project name and bundle identifier from `tauri.conf.json` and writes a `manifest.toml` so that `crabyard update-ui`, `crabyard add`, and `crabyard upgrade` can be used.
 
@@ -356,13 +359,13 @@ Initialize Crabyard in an existing Tauri v2 project. Detects the current project
 crabyard init [OPTIONS]
 ```
 
-### Options
+### Options {#options-6}
 
 | Flag | Description | Default |
 |------|-------------|---------|
 | `--project <DIR>` / `-p` | Path to the project directory | Current directory |
 
-### Examples
+### Examples {#examples-7}
 
 ```sh
 # Initialize in current directory
@@ -374,7 +377,7 @@ crabyard init -p ../my-tauri-app
 
 ---
 
-## `crabyard completions`
+## `crabyard completions` {#crabyard-completions}
 
 Generate shell completion scripts for `crabyard` commands.
 
@@ -382,13 +385,13 @@ Generate shell completion scripts for `crabyard` commands.
 crabyard completions <SHELL>
 ```
 
-### Arguments
+### Arguments {#arguments-3}
 
 | Argument | Description |
 |----------|-------------|
 | `SHELL` | Shell to generate completions for: `bash`, `zsh`, `fish`, `powershell`, or `elvish` |
 
-### Examples
+### Examples {#examples-8}
 
 ```sh
 # Bash
@@ -406,7 +409,7 @@ crabyard completions powershell >> $PROFILE
 
 ---
 
-## Configuration file
+## Configuration file {#configuration-file}
 
 Crabyard reads `~/.crabyardrc` (TOML format) for default preferences. CLI flags and environment variables always take priority over config file values.
 
@@ -416,5 +419,5 @@ pm = "bun"
 auth = "github"
 ui = "shadcn"
 author = "Your Name"
-license_key = "tk_..."
+license_key = "CRAB-..."
 ```

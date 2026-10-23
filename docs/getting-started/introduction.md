@@ -3,9 +3,11 @@ title: Introduction
 description: What is Crabyard and why use it.
 ---
 
+# Introduction
+
 Crabyard is a CLI tool that generates [Tauri v2](https://v2.tauri.app/) desktop app foundations. Compose a Rust and React stack with authentication, settings, updater integration, coding-agent instructions, and repeatable project recipes.
 
-## Why Crabyard?
+## Why Crabyard? {#why-crabyard}
 
 Starting a Tauri project from scratch means:
 
@@ -18,7 +20,7 @@ Starting a Tauri project from scratch means:
 
 Crabyard connects these foundations in a generated project. The supported combinations are checked in CI. Your app still needs its own credentials, signing configuration, product behavior, and release review; `crabyard check` identifies configuration gaps before handoff.
 
-## How it works
+## How it works {#how-it-works}
 
 Crabyard uses a **modular overlay system**:
 
@@ -28,7 +30,7 @@ Crabyard uses a **modular overlay system**:
 
 The CLI copies the base, applies overlays, replaces template tokens (app name, bundle ID, etc.), installs dependencies, and initializes git.
 
-## Stack
+## Stack {#stack}
 
 Every generated app includes:
 
@@ -41,7 +43,7 @@ Every generated app includes:
 | Bundler | Vite |
 | Package manager | Bun, npm, pnpm, or Yarn |
 
-## What's next
+## What's next {#whats-next}
 
-- [Install Crabyard](/getting-started/installation/)
-- [Generate your first app](/getting-started/quick-start/)
+- [Install Crabyard](installation.md)
+- [Generate your first app](quick-start.md)

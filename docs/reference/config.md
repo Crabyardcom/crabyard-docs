@@ -3,11 +3,13 @@ title: Configuration
 description: Reference for tauri.conf.json and template tokens.
 ---
 
-## tauri.conf.json
+# Configuration
+
+## tauri.conf.json {#tauriconfjson}
 
 The main Tauri configuration file. Key sections:
 
-### App metadata
+### App metadata {#app-metadata}
 
 ```json
 {
@@ -17,7 +19,7 @@ The main Tauri configuration file. Key sections:
 }
 ```
 
-### Window settings
+### Window settings {#window-settings}
 
 ```json
 {
@@ -36,7 +38,7 @@ The main Tauri configuration file. Key sections:
 
 Set `"decorations": true` to use the native OS title bar instead of the custom one.
 
-### Updater
+### Updater {#updater}
 
 ```json
 {
@@ -51,25 +53,27 @@ Set `"decorations": true` to use the native OS title bar instead of the custom o
 }
 ```
 
-See the [Auto-Updates guide](/guides/auto-updates/) for key generation.
+See the [Auto-Updates guide](../guides/auto-updates.md) for key generation.
 
-### Bundle
+### Bundle {#bundle}
 
 ```json
 {
   "bundle": {
     "active": true,
     "targets": "all",
-    "createUpdaterArtifacts": "v1Compatible"
+    "createUpdaterArtifacts": false
   }
 }
 ```
 
 `"targets": "all"` builds all installer formats for the current platform.
 
+Updater artifacts are disabled in the scaffold. Set `createUpdaterArtifacts` to `true` after configuring signed updates; see the [Auto-Updates guide](../guides/auto-updates.md).
+
 ---
 
-## Template tokens
+## Template tokens {#template-tokens}
 
 During project generation, Crabyard replaces these tokens across all files:
 
@@ -82,14 +86,14 @@ During project generation, Crabyard replaces these tokens across all files:
 | `{{APP_VERSION}}` | Initial version | `0.1.0` |
 | `{{APP_DESCRIPTION}}` | Short description | `A desktop utility` |
 | `{{APP_AUTHOR}}` | Author name | `Jane Doe` |
-| `{{GENERATED_AT}}` | Generation timestamp | `2025-01-15T10:30:00Z` |
+| `{{GENERATED_AT}}` | Generation timestamp, in Unix seconds | `1700000000` |
 | `{{CRABYARD_VERSION}}` | CLI version used | `1.0.0` |
 | `{{AUTH_MODULE}}` | Selected auth module | `github` |
 | `{{UI_MODULE}}` | Selected UI framework | `shadcn` |
 
 ---
 
-## Capabilities (permissions)
+## Capabilities (permissions) {#capabilities-permissions}
 
 Tauri v2 uses a capability-based permission system. The default capability file at `src-tauri/capabilities/default.json` grants:
 

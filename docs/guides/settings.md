@@ -3,9 +3,11 @@ title: Settings System
 description: Persistent app settings with typed state management.
 ---
 
+# Settings System
+
 Every generated Crabyard app includes a settings system backed by [tauri-plugin-store](https://v2.tauri.app/plugin/store/) and [Zustand](https://zustand.docs.pmnd.rs/).
 
-## Architecture
+## Architecture {#architecture}
 
 ```
 useSettings() hook
@@ -17,7 +19,7 @@ tauri-plugin-store (src-tauri)
 JSON file on disk
 ```
 
-## Usage in components
+## Usage in components {#usage-in-components}
 
 ```tsx
 import { useSettings } from "@/hooks/useSettings";
@@ -37,25 +39,26 @@ function MyComponent() {
 }
 ```
 
-## Available methods
+## Available methods {#available-methods}
 
 | Method | Description |
 |--------|-------------|
 | `settings` | Current settings object |
 | `settingsLoading` | `true` while settings are being loaded |
 | `loadSettings()` | Reload settings from disk |
-| `updateSettings(partial)` | Merge partial settings and persist |
+| `updateSettings(partial)` | Merge partial settings and persist; returns `false` and restores prior state if saving fails |
 | `pickFolder()` | Open a native folder picker, save selection |
 
-## Adding new settings
+## Adding new settings {#adding-new-settings}
 
 1. Add the field to `AppSettings` in `src/lib/types.ts`:
 
 ```ts
 export interface AppSettings {
-  workspaceRoot: string;
-  theme: string;
-  myNewSetting: boolean; // add here
+  workspaceRoot: string | null;
+  theme: string | null;
+  launchAtStartup: boolean;
+  myNewSetting: boolean;
 }
 ```
 

@@ -1,9 +1,12 @@
 .git
 .github
 node_modules
-.next
-.astro
 dist
+.astro
+.venv
+.cache
+__pycache__
+*.py[cod]
 .env
 .env.*
 *.tsbuildinfo

@@ -3,9 +3,11 @@ title: Overlay Architecture
 description: How Crabyard's modular overlay system composes auth, UI, and other modules on top of the base scaffold.
 ---
 
+# Overlay Architecture
+
 Crabyard generates projects using a **base + overlay** composition model. The base scaffold provides the app skeleton, and overlays add specific features (auth provider, UI framework) by merging files on top.
 
-## How It Works
+## How It Works {#how-it-works}
 
 ```
 base/                 ← Core app (always copied first)
@@ -14,7 +16,7 @@ base/                 ← Core app (always copied first)
   = your project      ← Fully assembled app
 ```
 
-### Generation order
+### Generation order {#generation-order}
 
 1. **Copy base template** — the minimal Tauri v2 + React scaffold
 2. **Apply auth overlay** — copies auth module files on top (overwrites matching paths)
@@ -23,7 +25,7 @@ base/                 ← Core app (always copied first)
 5. **Replace tokens** — substitutes `{{APP_NAME}}`, `{{APP_SLUG}}`, etc.
 6. **Merge dependencies** — combines `npm_dev_dependencies` from `module.json` into `package.json`
 
-## Base Template
+## Base Template {#base-template}
 
 The base scaffold at `base/` in [crabyard-templates](https://github.com/Crabyardcom/crabyard-templates) contains:
 
@@ -37,7 +39,7 @@ The base scaffold at `base/` in [crabyard-templates](https://github.com/Crabyard
 
 The base is **not standalone** — it requires an auth overlay (even `none`) and a UI overlay.
 
-## Module Configuration
+## Module Configuration {#module-configuration}
 
 Each overlay has a `module.json` that declares:
 
@@ -53,7 +55,7 @@ Each overlay has a `module.json` that declares:
 }
 ```
 
-### Markers
+### Markers {#markers}
 
 Markers are placeholder comments in base template files:
 
@@ -65,13 +67,13 @@ During generation, the entire comment line is replaced with the content from `mo
 
 Markers are matched in both `//` (Rust/TypeScript) and `#` (TOML/shell) comment styles.
 
-### Dependencies
+### Dependencies {#dependencies}
 
 The `npm_dev_dependencies` map is merged into the generated `package.json`'s `devDependencies`. Later overlays override earlier ones if the same package appears.
 
-## Available Modules
+## Available Modules {#available-modules}
 
-### Auth
+### Auth {#auth}
 
 | Module | Overlay | Strategy |
 |--------|---------|----------|
@@ -79,14 +81,15 @@ The `npm_dev_dependencies` map is merged into the generated `package.json`'s `de
 | `google` | `auth/google/` | Google Loopback PKCE |
 | `none` | `auth/none/` | No authentication |
 
-### UI
+### UI {#ui}
 
 | Module | Overlay | Components |
 |--------|---------|------------|
 | `shadcn` | `ui/shadcn/` | Radix UI primitives + shadcn styling |
 | `daisyui` | `ui/daisyui/` | Tailwind class-based components |
+| `minimal` | `ui/minimal/` | Tailwind utilities without an external component library |
 
-## Token System
+## Token System {#token-system}
 
 These tokens are replaced in all non-binary files during generation:
 
@@ -102,12 +105,12 @@ These tokens are replaced in all non-binary files during generation:
 | `{{PACKAGE_MANAGER}}` | bun |
 | `{{PM_RUN}}` | bun run |
 | `{{PM_TAURI_DEV}}` | bun run tauri dev |
-| `{{CRABYARD_VERSION}}` | 1.5.3 |
+| `{{CRABYARD_VERSION}}` | 1.8.0 |
 | `{{GENERATED_AT}}` | 1741500000 |
 
-**Important**: Do not use `{{TOKEN}}` syntax inside `.tsx`/`.jsx` files — curly braces conflict with JSX expressions. Use `VITE_` environment variables instead.
+In `.tsx`/`.jsx` templates, keep replacement tokens inside quoted strings rather than bare JSX expressions. The generator escapes token values for supported source-file formats; a bare `{{TOKEN}}` JSX expression has a different meaning to the JSX parser.
 
-## Manifest
+## Manifest {#manifest}
 
 Each generated project includes `manifest.toml`, which records:
 

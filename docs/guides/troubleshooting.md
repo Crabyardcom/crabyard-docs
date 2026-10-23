@@ -3,9 +3,11 @@ title: Troubleshooting
 description: Solutions for common Crabyard issues on Windows, macOS, and Linux.
 ---
 
-## Build Errors
+# Troubleshooting
 
-### `error: linker 'link.exe' not found` (Windows)
+## Build Errors {#build-errors}
+
+### `error: linker 'link.exe' not found` (Windows) {#error-linker-linkexe-not-found-windows}
 
 MSVC Build Tools are missing. Install them:
 
@@ -15,9 +17,9 @@ winget install Microsoft.VisualStudio.2022.BuildTools
 
 During installation, select the **"Desktop development with C++"** workload. Then restart your terminal.
 
-### `webkit2gtk not found` (Linux)
+### `webkit2gtk not found` (Linux) {#webkit2gtk-not-found-linux}
 
-Install the required system libraries for your distro:
+Install the required system libraries for your distro. The [Tauri prerequisites](https://v2.tauri.app/start/prerequisites/) list current platform packages.
 
 ```sh
 # Ubuntu / Debian
@@ -29,17 +31,9 @@ sudo dnf install pkg-config webkit2gtk4.1-devel javascriptcoregtk4.1-devel gtk3-
 # Arch
 sudo pacman -S pkgconf webkit2gtk-4.1 gtk3 libsoup3 openssl libayatana-appindicator
 
-# openSUSE
-sudo zypper install pkg-config webkit2gtk3-soup2-devel gtk3-devel libsoup-devel libopenssl-devel libappindicator3-devel
-
-# Void
-sudo xbps-install -Sy pkg-config webkit2gtk-devel gtk+3-devel libsoup3-devel openssl-devel
-
-# Alpine
-sudo apk add pkgconf webkit2gtk-dev gtk+3.0-dev libsoup3-dev openssl-dev
 ```
 
-### `Xcode CLT not found` (macOS)
+### `Xcode CLT not found` (macOS) {#xcode-clt-not-found-macos}
 
 ```sh
 xcode-select --install
@@ -47,7 +41,7 @@ xcode-select --install
 
 This opens a system dialog. Click **Install** and wait for the download to complete (typically 2–5 minutes).
 
-### Rust version too old
+### Rust version too old {#rust-version-too-old}
 
 Crabyard requires Rust ≥ 1.90. Update via rustup:
 
@@ -57,29 +51,29 @@ rustup update stable
 
 ---
 
-## Runtime Errors
+## Runtime Errors {#runtime-errors}
 
-### App opens but shows a blank screen
+### App opens but shows a blank screen {#app-opens-but-shows-a-blank-screen}
 
 1. Right-click the window → **Inspect** → check the **Console** tab for JavaScript errors
 2. Verify Vite dev server is running on `http://localhost:1420`
 3. Check `tauri.conf.json` → `devUrl` matches the dev server port
 
-### `GITHUB_CLIENT_ID is not set`
+### `GITHUB_CLIENT_ID is not set` {#github_client_id-is-not-set}
 
 1. Copy `.env.example` to `.env` if you haven't:
-   ```sh
-   cp .env.example .env
-   ```
+    ```sh
+    cp .env.example .env
+    ```
 2. Fill in `GITHUB_CLIENT_ID` with your GitHub OAuth App's Client ID
 
-### OAuth Device Flow never completes
+### OAuth Device Flow never completes {#oauth-device-flow-never-completes}
 
 - Verify your GitHub OAuth App's **Client ID** matches `GITHUB_CLIENT_ID` in `.env`
 - Make sure you're entering the user code at `https://github.com/login/device`
-- Check that the GitHub OAuth App does **not** have a callback URL set (Device Flow doesn't use one)
+- Enable **Device Flow** in the GitHub OAuth App settings. Device Flow does not use the app's callback URL.
 
-### Port 1420 already in use
+### Port 1420 already in use {#port-1420-already-in-use}
 
 Another Vite dev server or process is using the port. Either stop it or change the port:
 
@@ -88,24 +82,27 @@ Another Vite dev server or process is using the port. Either stop it or change t
 
 ---
 
-## Generation Errors
+## Generation Errors {#generation-errors}
 
-### `Auth module 'X' not found in template`
+### `Auth module 'X' not found in template` {#auth-module-x-not-found-in-template}
 
 The cached template may be corrupted or outdated.
 
-1. Delete the template cache:
-   - **macOS/Linux**: `rm -rf ~/.cache/crabyard/templates/`
-   - **Windows**: Delete `%APPDATA%\crabyard\templates\`
+1. Remove the cached templates from the platform's cache directory:
+    - **macOS**: `~/Library/Caches/crabyard/templates/`
+    - **Linux**: `$XDG_CACHE_HOME/crabyard/templates/`, or `~/.cache/crabyard/templates/` when `XDG_CACHE_HOME` is unset
+    - **Windows**: `%LOCALAPPDATA%\crabyard\templates\`
 2. Re-run `crabyard new`
 
-### `License server unreachable`
+### `License server unreachable` {#license-server-unreachable}
 
 - Check your internet connection
 - The API at `api.crabyard.com` may be temporarily down
-- If you have a cached template, generation will use the cached version automatically
+- Licensed downloads validate the key remotely even when a template is cached
+- Use `--template /path/to/crabyard-templates` with a local checkout to generate without the license service
+- For a canonical-domain outage, use the explicit HTTPS API override described in [Installation](../getting-started/installation.md)
 
-### WebView2 installation hangs (Windows)
+### WebView2 installation hangs (Windows) {#webview2-installation-hangs-windows}
 
 The automated WebView2 installer has a 15-minute timeout. If it fails:
 
@@ -115,22 +112,22 @@ The automated WebView2 installer has a 15-minute timeout. If it fails:
 
 ---
 
-## Development Tips
+## Development Tips {#development-tips}
 
-### Hot reload not working
+### Hot reload not working {#hot-reload-not-working}
 
 1. Make sure _both_ the Vite dev server and Rust backend are running (`bun run tauri dev` starts both)
 2. Frontend changes hot-reload instantly; Rust changes require a recompile (automatic with `tauri dev`)
 
-### Slow Rust compilation
+### Slow Rust compilation {#slow-rust-compilation}
 
 First build is slow (compiling all dependencies). Subsequent builds are incremental. To speed things up:
 
 - Use `cargo check` instead of `cargo build` for type-checking
 - Install [`sccache`](https://github.com/mozilla/sccache) for a shared compilation cache
 - On Linux, use `mold` linker: add to `.cargo/config.toml`:
-  ```toml
-  [target.x86_64-unknown-linux-gnu]
-  linker = "clang"
-  rustflags = ["-C", "link-arg=-fuse-ld=mold"]
-  ```
+    ```toml
+    [target.x86_64-unknown-linux-gnu]
+    linker = "clang"
+    rustflags = ["-C", "link-arg=-fuse-ld=mold"]
+    ```

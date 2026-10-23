@@ -3,7 +3,9 @@ title: Quick Start
 description: Generate and run your first Crabyard app.
 ---
 
-## Generate a project
+# Quick Start
+
+## Generate a project {#generate-a-project}
 
 Run `crabyard new` to create a new app:
 
@@ -11,10 +13,13 @@ Run `crabyard new` to create a new app:
 crabyard new "My Desktop App"
 ```
 
-The CLI will prompt you to choose:
+Interactive generation lets you choose:
 
-1. **Auth provider** — GitHub, Google, or None
-2. **UI framework** — shadcn/ui, daisyUI, or Minimal
+1. **Package manager** — Bun, pnpm, Yarn, or npm
+2. **Auth provider** — GitHub, Google, or None
+3. **UI framework** — shadcn/ui, daisyUI, or Minimal
+4. **Extras** — optional plugins and frontend libraries
+5. **App details** — name, identifier, version, and metadata
 
 To skip prompts, pass flags directly:
 
@@ -30,7 +35,7 @@ crabyard check --project ./field-notes
 crabyard context --project ./field-notes --brief "Add tags and search" --output docs/TAGS_CONTEXT.md
 ```
 
-`check` reports configuration gaps without changing files. `context` writes a curated agent handoff without loading environment secrets or overwriting an existing output. The generation brief is saved in `docs/AI_CONTEXT.md`. See [AI development](/guides/ai-development/) for JSON audits, strict CI checks, and context previews.
+`check` reports configuration gaps without changing files. `context` writes a curated agent handoff that excludes environment values and preserves an existing output file. The generation brief is saved in `docs/AI_CONTEXT.md`. See [AI development](../guides/ai-development.md) for JSON audits, strict CI checks, and context previews.
 
 To use public templates from a local checkout without a license key:
 
@@ -39,7 +44,7 @@ git clone https://github.com/Crabyardcom/crabyard-templates.git
 crabyard new "My Desktop App" --template ./crabyard-templates --preset local-first --yes
 ```
 
-## Run the app
+## Run the app {#run-the-app}
 
 ```sh
 cd my-desktop-app
@@ -51,9 +56,9 @@ Your app opens with:
 - A custom title bar with window controls
 - The login screen (if you chose an auth provider)
 - A settings dialog
-- Auto-update checking (in production builds)
+- Auto-update integration, ready to enable after configuring your signed releases
 
-## Project structure
+## Project structure {#project-structure}
 
 ```
 my-desktop-app/
@@ -87,7 +92,7 @@ my-desktop-app/
 └── vite.config.ts
 ```
 
-## Build for production
+## Build for production {#build-for-production}
 
 ```sh
 bun run tauri build
@@ -95,8 +100,8 @@ bun run tauri build
 
 This produces platform-specific installers in `src-tauri/target/release/bundle/`.
 
-## Next steps
+## Next steps {#next-steps}
 
-- [Configure auth providers](/guides/auth/)
-- [Customize the UI](/guides/ui/)
-- [Set up auto-updates](/guides/auto-updates/)
+- [Configure auth providers](../guides/auth.md)
+- [Customize the UI](../guides/ui.md)
+- [Set up auto-updates](../guides/auto-updates.md)

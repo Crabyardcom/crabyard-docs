@@ -3,7 +3,9 @@ title: Installation
 description: Install Crabyard and its prerequisites.
 ---
 
-## Prerequisites
+# Installation
+
+## Prerequisites {#prerequisites}
 
 Crabyard generates Tauri v2 apps, so you need the Tauri development toolchain installed:
 
@@ -11,7 +13,7 @@ Crabyard generates Tauri v2 apps, so you need the Tauri development toolchain in
 - **Bun** 1.1+ — [bun.sh](https://bun.sh/)
 - **Git** — [git-scm.com](https://git-scm.com/)
 
-### Platform-specific
+### Platform-specific {#platform-specific}
 
 **Windows:** WebView2 (included in Windows 10 1803+ and Windows 11)
 
@@ -32,7 +34,7 @@ sudo pacman -S webkit2gtk-4.1 gtk3 libsoup3 openssl libayatana-appindicator
 xcode-select --install
 ```
 
-## Install Crabyard
+## Install Crabyard {#install-crabyard}
 
 **macOS / Linux:**
 
@@ -70,7 +72,7 @@ cd crabyard-cli
 cargo install --path .
 ```
 
-## Verify installation
+## Verify installation {#verify-installation}
 
 ```sh
 crabyard doctor
@@ -78,9 +80,16 @@ crabyard doctor
 
 This checks all prerequisites: Rust, Cargo, Bun, Git, Tauri CLI, and platform-specific dependencies.
 
-## License key
+## License key {#license-key}
 
-Purchase a license at [Crabyard](https://crabyard.com) and set your key:
+Hosted license checkout is not available yet. You can use the public templates without a license key:
+
+```sh
+git clone https://github.com/Crabyardcom/crabyard-templates.git
+crabyard new "My App" --template ./crabyard-templates --preset local-first --yes
+```
+
+Existing license holders can continue to use hosted template downloads. Set your existing key:
 
 ```sh
 export CRABYARD_LICENSE_KEY=CRAB-...

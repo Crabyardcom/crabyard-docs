@@ -3,7 +3,9 @@ title: Project Structure
 description: Anatomy of a generated Crabyard project.
 ---
 
-## Directory layout
+# Project Structure
+
+## Directory layout {#directory-layout}
 
 ```
 my-app/
@@ -40,6 +42,7 @@ my-app/
 │       ├── lib.rs                # Plugin registration + command setup
 │       ├── error.rs              # Error types
 │       ├── state.rs              # App state
+│       ├── credentials.rs        # Native credential persistence
 │       ├── auth/                 # Auth module (Rust side)
 │       │   ├── mod.rs
 │       │   ├── device_flow.rs    # or loopback.rs for Google
@@ -48,7 +51,8 @@ my-app/
 │       ├── commands/             # Tauri IPC commands
 │       │   ├── mod.rs
 │       │   ├── auth.rs
-│       │   └── settings.rs
+│       │   ├── settings.rs
+│       │   └── documents.rs      # Versioned local document commands
 │       └── models/               # Data structures
 │           ├── mod.rs
 │           ├── auth.rs
@@ -59,28 +63,29 @@ my-app/
 └── .env.example                  # Required environment variables
 ```
 
-## Key files
+## Key files {#key-files}
 
-### Frontend
+### Frontend {#frontend}
 
 | File | Purpose |
 |------|---------|
 | `App.tsx` | Root component — checks auth state, renders login or dashboard |
 | `appStore.ts` | Zustand store — holds auth state, settings, UI state |
 | `tauri.ts` | Typed wrappers around `invoke()` calls to Rust commands |
-| `types.ts` | Shared interfaces (`AppSettings`, `User`, etc.) |
+| `types.ts` | Shared interfaces (`AppSettings`, `LocalDocument`, and selected auth types) |
 
-### Backend
+### Backend {#backend}
 
 | File | Purpose |
 |------|---------|
 | `lib.rs` | Registers Tauri plugins and IPC commands |
 | `error.rs` | `AppError` enum with `thiserror` derives |
 | `state.rs` | `AppState` struct (HTTP client, shared state) |
-| `commands/auth.rs` | `login`, `logout`, `get_user` commands |
+| `commands/auth.rs` | Selected provider's login, logout, and authentication-status commands |
+| `credentials.rs` | Native credential storage used by authentication providers |
 | `commands/settings.rs` | `get_settings`, `set_settings` commands |
 
-### Configuration
+### Configuration {#configuration}
 
 | File | Purpose |
 |------|---------|
