@@ -3,7 +3,7 @@ import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 
 export default defineConfig({
-	site: 'https://docs.crabyard.dev',
+	site: 'https://crabyard-docs-production.up.railway.app',
 	integrations: [
 		starlight({
 			title: 'Crabyard',

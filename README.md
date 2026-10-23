@@ -1,6 +1,6 @@
 # Crabyard Documentation
 
-The [Crabyard documentation](https://docs.crabyard.dev), built with Astro and Starlight. Standalone repository: [Crabyardcom/crabyard-docs](https://github.com/Crabyardcom/crabyard-docs).
+The [Crabyard documentation](https://crabyard-docs-production.up.railway.app), built with Astro and Starlight. Standalone repository: [Crabyardcom/crabyard-docs](https://github.com/Crabyardcom/crabyard-docs).
 
 ```sh
 bun install --frozen-lockfile

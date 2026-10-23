@@ -37,13 +37,13 @@ xcode-select --install
 **macOS / Linux:**
 
 ```sh
-curl -fsSL https://crabyard.dev/install.sh | sh
+curl -fsSL https://crabyard-web-production.up.railway.app/install.sh | sh
 ```
 
 **Windows (PowerShell):**
 
 ```powershell
-irm https://crabyard.dev/install.ps1 | iex
+irm https://crabyard-web-production.up.railway.app/install.ps1 | iex
 ```
 
 **From source:**
@@ -64,7 +64,7 @@ This checks all prerequisites: Rust, Cargo, Bun, Git, Tauri CLI, and platform-sp
 
 ## License key
 
-Purchase a license at [crabyard.dev](https://crabyard.dev) and set your key:
+Purchase a license at [Crabyard](https://crabyard-web-production.up.railway.app) and set your key:
 
 ```sh
 export CRABYARD_LICENSE_KEY=CRAB-...
